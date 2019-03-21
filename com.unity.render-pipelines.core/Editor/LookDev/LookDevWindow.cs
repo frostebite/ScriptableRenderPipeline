@@ -7,28 +7,18 @@ using UnityEngine.UIElements;
 
 namespace UnityEditor.Rendering.LookDev
 {
-    public enum Layout
-    {
-        ViewA,
-        ViewB,
-        HorizontalSplit,
-        VerticalSplit,
-        CustomSplit,
-        CustomCircular
-    }
-
-    internal interface ILookDevDisplayer
+    public interface IDisplayer
     {
         Rect GetRect(ViewIndex index);
         void SetTexture(ViewIndex index, Texture texture);
 
-        event Action<LayoutContext.Layout> OnLayoutChanged;
+        event Action<Layout> OnLayoutChanged;
     }
 
     /// <summary>
     /// Displayer and User Interaction 
     /// </summary>
-    internal class LookDevWindow : EditorWindow, ILookDevDisplayer
+    internal class DisplayWindow : EditorWindow, IDisplayer
     {
         // /!\ WARNING:
         //The following const are used in the uss.
@@ -52,14 +42,14 @@ namespace UnityEditor.Rendering.LookDev
 
         Image[] m_Views = new Image[2];
 
-        LayoutContext.Layout layout
+        Layout layout
         {
             get => LookDev.currentContext.layout.viewLayout;
             set
             {
                 if (LookDev.currentContext.layout.viewLayout != value)
                 {
-                    if (value == LayoutContext.Layout.HorizontalSplit || value == LayoutContext.Layout.VerticalSplit)
+                    if (value == Layout.HorizontalSplit || value == Layout.VerticalSplit)
                     {
                         if (m_ViewContainer.ClassListContains(k_OneViewClass))
                         {
@@ -110,8 +100,8 @@ namespace UnityEditor.Rendering.LookDev
             }
         }
 
-        event Action<LayoutContext.Layout> OnLayoutChangedInternal;
-        event Action<LayoutContext.Layout> ILookDevDisplayer.OnLayoutChanged
+        event Action<Layout> OnLayoutChangedInternal;
+        event Action<Layout> IDisplayer.OnLayoutChanged
         {
             add => OnLayoutChangedInternal += value;
             remove => OnLayoutChangedInternal -= value;
@@ -149,7 +139,7 @@ namespace UnityEditor.Rendering.LookDev
                 CoreEditorUtils.LoadIcon(LookDevStyle.k_IconFolder, "LookDevZone"),
                 });
             toolbarRadio.RegisterCallback((ChangeEvent<int> evt)
-                => layout = (LayoutContext.Layout)evt.newValue);
+                => layout = (Layout)evt.newValue);
             toolbarRadio.SetValueWithoutNotify((int)layout);
 
             // Environment part
@@ -204,10 +194,10 @@ namespace UnityEditor.Rendering.LookDev
             //to complete
         }
 
-        Rect ILookDevDisplayer.GetRect(ViewIndex index)
+        Rect IDisplayer.GetRect(ViewIndex index)
             => m_Views[(int)index].contentRect;
 
-        void ILookDevDisplayer.SetTexture(ViewIndex index, Texture texture)
+        void IDisplayer.SetTexture(ViewIndex index, Texture texture)
             => m_Views[(int)index].image = texture;
     }
     

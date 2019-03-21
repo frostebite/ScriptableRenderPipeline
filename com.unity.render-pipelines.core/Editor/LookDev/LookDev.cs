@@ -14,37 +14,38 @@ namespace UnityEditor.Rendering.LookDev
     {
         const string lastRenderingDataSavePath = "Library/LookDevConfig.asset";
 
-        static LookDevWindow window;
-        static LookDevRenderer renderer;
+        static DisplayWindow window;
+        static Renderer renderer;
         
         public static bool open { get; private set; }
 
-        static ILookDevDataProvider dataProvider
-            => RenderPipelineManager.currentPipeline as ILookDevDataProvider;
+        static IDataProvider dataProvider
+            => RenderPipelineManager.currentPipeline as IDataProvider;
 
         /// <summary>
         /// Does LookDev is supported with the current render pipeline?
         /// </summary>
         public static bool supported => dataProvider != null;
         
-        public static LookDevContent sceneContents { get; set; } = new LookDevContent();
-        
-        public static LookDevContext currentContext { get; set; }
+        public static Context currentContext { get; set; }
+
+        public static IDisplayer currentDisplayer => window;
 
         static LookDev()
             => currentContext = LoadConfigInternal() ?? GetDefaultContext();
 
-        static LookDevContext GetDefaultContext()
-            => UnityEngine.ScriptableObject.CreateInstance<LookDevContext>();
+        static Context GetDefaultContext()
+            => UnityEngine.ScriptableObject.CreateInstance<Context>();
 
         public static void ResetConfig()
             => currentContext = GetDefaultContext();
 
-        static LookDevContext LoadConfigInternal(string path = lastRenderingDataSavePath)
+        static Context LoadConfigInternal(string path = lastRenderingDataSavePath)
         {
-            var last = InternalEditorUtility.LoadSerializedFileAndForget(path)?[0] as LookDevContext;
+            var objs = InternalEditorUtility.LoadSerializedFileAndForget(path);
+            var last = (objs.Length > 0 ? objs[0] : null) as Context;
             if (last != null && !last.Equals(null))
-                return ((LookDevContext)last);
+                return ((Context)last);
             return null;
         }
 
@@ -61,7 +62,7 @@ namespace UnityEditor.Rendering.LookDev
         [MenuItem("Window/Experimental/NEW Look Dev", false, -1)]
         public static void Open()
         {
-            window = EditorWindow.GetWindow<LookDevWindow>();
+            window = EditorWindow.GetWindow<DisplayWindow>();
             window.titleContent = LookDevStyle.WindowTitleAndIcon;
             ConfigureLookDev();
         }
@@ -69,7 +70,7 @@ namespace UnityEditor.Rendering.LookDev
         [Callbacks.DidReloadScripts]
         static void OnEditorReload()
         {
-            var windows = Resources.FindObjectsOfTypeAll<LookDevWindow>();
+            var windows = Resources.FindObjectsOfTypeAll<DisplayWindow>();
             window = windows.Length > 0 ? windows[0] : null;
             open = window != null;
             if (open)
@@ -85,7 +86,7 @@ namespace UnityEditor.Rendering.LookDev
 
         static void ConfigureRenderer()
         {
-            renderer = new LookDevRenderer(window, currentContext, sceneContents);
+            renderer = new Renderer(window, currentContext);
             window.OnWindowClosed += () =>
             {
                 renderer.CleanUp();
@@ -96,5 +97,7 @@ namespace UnityEditor.Rendering.LookDev
                 open = false;
             };
         }
+
+        public static void PushSceneChangesToRenderer() => renderer?.UpdateScene();
     }
 }

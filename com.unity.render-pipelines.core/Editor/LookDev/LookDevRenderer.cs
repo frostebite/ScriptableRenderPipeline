@@ -1,14 +1,10 @@
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace UnityEditor.Rendering.LookDev
 {
-    public enum ViewIndex
-    {
-        FirstOrFull,
-        Second
-    };
-
     enum ViewCompositionIndex
     {
         First = ViewIndex.FirstOrFull,
@@ -16,13 +12,13 @@ namespace UnityEditor.Rendering.LookDev
         Composite
     };
 
-    class LookDevRenderTextureCache
+    class RenderTextureCache
     {
         RenderTexture[] m_RTs = new RenderTexture[3];
 
         public RenderTexture this[ViewCompositionIndex index]
             => m_RTs[(int)index];
-        
+
         public void UpdateSize(Rect rect, ViewCompositionIndex index)
         {
             int width = (int)rect.width;
@@ -35,46 +31,25 @@ namespace UnityEditor.Rendering.LookDev
                     RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default);
         }
     }
-
-    public class SceneContent
-    {
-        //TODO: list?
-        public GameObject contentObject { get; set; }
-
-        //TODO: lights
-    }
-
-    public class LookDevContent
-    {
-        SceneContent[] m_SCs = new SceneContent[2]
-        {
-            new SceneContent(),
-            new SceneContent()
-        };
-
-        public SceneContent this[ViewIndex index]
-            => m_SCs[(int)index];
-    }
-
+    
     /// <summary>
     /// Rendering logic
+    /// TODO: extract SceneLogic elswhere
     /// </summary>
-    internal class LookDevRenderer
+    internal class Renderer
     {
-        ILookDevDisplayer displayer;
-        LookDevContext context;
-        LookDevContent content;
-        LookDevRenderTextureCache m_RenderTextures = new LookDevRenderTextureCache();
+        IDisplayer displayer;
+        Context contexts;
+        RenderTextureCache m_RenderTextures = new RenderTextureCache();
         PreviewRenderUtility previewUtility;
 
-        public LookDevRenderer(
-            ILookDevDisplayer displayer,
-            LookDevContext context,
-            LookDevContent content)
+
+        public Renderer(
+            IDisplayer displayer,
+            Context contexts)
         {
             this.displayer = displayer;
-            this.context = context;
-            this.content = content;
+            this.contexts = contexts;
 
             previewUtility = new PreviewRenderUtility();
 
@@ -91,68 +66,69 @@ namespace UnityEditor.Rendering.LookDev
                 previewUtility.Cleanup();
             }
         }
-        ~LookDevRenderer() => CleanUp();
+        ~Renderer() => CleanUp();
+
+        public void UpdateScene()
+        {
+            previewUtility.Cleanup();
+            previewUtility = new PreviewRenderUtility();
+            var viewContent = contexts.GetViewContent(ViewIndex.FirstOrFull);
+            if (viewContent == null)
+            {
+                viewContent.prefabInstanceInPreview = null;
+                return;
+            }
+
+            var obj =
+                //PrefabUtility.LoadPrefabContentsIntoPreviewScene()
+                previewUtility.InstantiatePrefabInScene(viewContent.contentPrefab);
+            obj.transform.position = Vector3.zero;
+            obj.transform.rotation = Quaternion.identity;
+            viewContent.prefabInstanceInPreview = obj;
+        }
 
         public void Render()
         {
-            //if (Event.current.type == EventType.Repaint)
-            //{
-            //    if (m_LookDevConfig.rotateObjectMode)
-            //        m_ObjRotationAcc = Math.Min(m_ObjRotationAcc + Time.deltaTime * 0.5f, 1.0f);
-            //    else
-            //        // Do brutal stop because weoften want to stop at a particular position
-            //        m_ObjRotationAcc = 0.0f; // Math.Max(m_ObjRotationAcc - Time.deltaTime * 0.5f, 0.0f);
-
-            //    if (m_LookDevConfig.rotateEnvMode)
-            //        m_EnvRotationAcc = Math.Min(m_EnvRotationAcc + Time.deltaTime * 0.5f, 1.0f);
-            //    else
-            //        // Do brutal stop because weoften want to stop at a particular position
-            //        m_EnvRotationAcc = 0.0f; // Math.Max(m_EnvRotationAcc - Time.deltaTime * 0.5f, 0.0f);
-
-            //    // Handle objects/env rotation
-            //    // speed control (in degree) - Time.deltaTime is in seconds
-            //    m_CurrentObjRotationOffset = (m_CurrentObjRotationOffset + Time.deltaTime * 360.0f * 0.3f * m_LookDevConfig.objRotationSpeed * m_ObjRotationAcc) % 360.0f;
-            //    m_LookDevConfig.lookDevContexts[0].envRotation = (m_LookDevConfig.lookDevContexts[0].envRotation + Time.deltaTime * 360.0f * 0.03f * m_LookDevConfig.envRotationSpeed * m_EnvRotationAcc) % 720.0f; // 720 to match GUI
-            //    m_LookDevConfig.lookDevContexts[1].envRotation = (m_LookDevConfig.lookDevContexts[1].envRotation + Time.deltaTime * 360.0f * 0.03f * m_LookDevConfig.envRotationSpeed * m_EnvRotationAcc) % 720.0f; // 720 to match GUI
-
-                switch (context.layout.viewLayout)
-                {
-                    case LayoutContext.Layout.FullA:
-                    RenderSingle(ViewCompositionIndex.First);
+            switch (contexts.layout.viewLayout)
+            {
+                case Layout.FullA:
+                    RenderSingle(ViewIndex.FirstOrFull);
                     break;
-                case LayoutContext.Layout.FullB:
-                    RenderSingle(ViewCompositionIndex.Second);
+                case Layout.FullB:
+                    RenderSingle(ViewIndex.Second);
                     break;
-                    case LayoutContext.Layout.HorizontalSplit:
-                    case LayoutContext.Layout.VerticalSplit:
-                        RenderSideBySide();
-                        break;
-                    case LayoutContext.Layout.CustomSplit:
-                    case LayoutContext.Layout.CustomCircular:
-                        RenderDualView();
-                        break;
-                }
-            //}
+                case Layout.HorizontalSplit:
+                case Layout.VerticalSplit:
+                    RenderSideBySide();
+                    break;
+                case Layout.CustomSplit:
+                case Layout.CustomCircular:
+                    RenderDualView();
+                    break;
+            }
         }
 
         bool IsNullArea(Rect r)
             => r.width == 0 || r.height == 0
             || float.IsNaN(r.width) || float.IsNaN(r.height);
 
-        void RenderSingle(ViewCompositionIndex index)
+        void RenderSingle(ViewIndex index)
         {
-            Rect rect = displayer.GetRect((ViewIndex)index);
+            Rect rect = displayer.GetRect(index);
             if (IsNullArea(rect))
                 return;
 
-            m_RenderTextures.UpdateSize(rect, index);
+            var cameraState = contexts.GetCameraState(index);
+            var viewContext = contexts.GetViewContent(index);
+
+            m_RenderTextures.UpdateSize(rect, (ViewCompositionIndex)index);
 
             var texture = RenderScene(
                 rect,
-                //context,
-                content[(ViewIndex)index].contentObject);
+                cameraState,
+                viewContext);
 
-            displayer.SetTexture((ViewIndex)index, texture);
+            displayer.SetTexture(ViewIndex.FirstOrFull, texture);
         }
 
         void RenderSideBySide()
@@ -165,13 +141,21 @@ namespace UnityEditor.Rendering.LookDev
 
         }
 
-        private Texture RenderScene(Rect previewRect, GameObject currentObject)
+        private Texture RenderScene(Rect previewRect, CameraState cameraState, ViewContext context)
         {
             previewUtility.BeginPreview(previewRect, "IN BigTitle inner");
-            
+
             previewUtility.camera.renderingPath = RenderingPath.DeferredShading;
-            previewUtility.camera.backgroundColor = Color.black;
+            previewUtility.camera.backgroundColor = Color.white;
             previewUtility.camera.allowHDR = true;
+
+            previewUtility.camera.transform.position = cameraState.position;
+            previewUtility.camera.transform.rotation = cameraState.rotation.value;
+            previewUtility.camera.fieldOfView = cameraState.fov;
+            previewUtility.camera.nearClipPlane = 0f;
+            previewUtility.camera.farClipPlane = cameraState.farClip;
+            previewUtility.camera.aspect = previewRect.width / previewRect.height;
+
 
             //for (int lightIndex = 0; lightIndex < 2; lightIndex++)
             //{
@@ -179,26 +163,26 @@ namespace UnityEditor.Rendering.LookDev
             //    previewUtility.lights[lightIndex].intensity = 0.0f;
             //    previewUtility.lights[lightIndex].shadows = LightShadows.None;
             //}
-            
+
             //previewUtility.ambientColor = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 
             //RenderSettings.ambientIntensity = 1.0f; // fix this to 1, this parameter should not exist!
             //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox; // Force skybox for our HDRI
             //RenderSettings.reflectionIntensity = 1.0f;
-            
-            if (currentObject != null)
-            {
-                foreach (Renderer renderer in currentObject.GetComponentsInChildren<Renderer>())
-                    renderer.enabled = true;
-            }
+
+            //if (sceneContent != null)
+            //{
+            //    foreach (Renderer renderer in sceneContent.GetComponentsInChildren<Renderer>())
+            //        renderer.enabled = true;
+            //}
 
             previewUtility.Render(true, false);
 
-            if (currentObject != null)
-            {
-                foreach (Renderer renderer in currentObject.GetComponentsInChildren<Renderer>())
-                    renderer.enabled = false;
-            }
+            //if (sceneContent != null)
+            //{
+            //    foreach (Renderer renderer in sceneContent.GetComponentsInChildren<Renderer>())
+            //        renderer.enabled = false;
+            //}
 
             return previewUtility.EndPreview();
         }
