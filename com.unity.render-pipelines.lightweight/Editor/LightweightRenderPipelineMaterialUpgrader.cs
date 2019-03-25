@@ -365,8 +365,10 @@ namespace UnityEditor.Rendering.LWRP
         }
     }
 
+    
     public class TerrainUpgrader : MaterialUpgrader
     {
+        
         public TerrainUpgrader(string oldShaderName)
         {
             RenameShader(oldShaderName, ShaderUtils.GetShaderPath(ShaderPathID.TerrainLit));
