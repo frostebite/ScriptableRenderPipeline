@@ -5,6 +5,7 @@ using UnityEditor.ProjectWindowCallback;
 
 namespace UnityEngine.Rendering.LWRP
 {    
+    
     public class ForwardRendererData : ScriptableRendererData
     {
         [SerializeField] Shader m_BlitShader = null;
@@ -36,6 +37,7 @@ namespace UnityEngine.Rendering.LWRP
         }
 #endif
         
+        
         protected override ScriptableRenderer Create()
         {
             return new ForwardRenderer(this);
@@ -66,11 +68,13 @@ namespace UnityEngine.Rendering.LWRP
             get => m_OpaqueLayerMask;
         }
 
+        
         public LayerMask transparentLayerMask
         {
             get => m_TransparentLayerMask;
         }
 
+        
         public StencilStateData defaultStencilState
         {
             get => m_DefaultStencilState;
