@@ -26,10 +26,14 @@ namespace UnityEditor.Rendering.LWRP
         SpecularAlpha
     }
 
+    
     public enum ReflectionSource
     {
+        
         NoReflection,
+        
         Cubemap,
+        
         ReflectionProbe
     }
 
