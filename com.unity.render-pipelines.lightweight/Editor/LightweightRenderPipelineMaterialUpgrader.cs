@@ -230,8 +230,10 @@ namespace UnityEditor.Rendering.LWRP
         };
     }
 
+    
     public class StandardUpgrader : MaterialUpgrader
     {
+        
         public static void UpdateStandardMaterialKeywords(Material material)
         {
             if (material == null)
@@ -247,6 +249,7 @@ namespace UnityEditor.Rendering.LWRP
             CoreUtils.SetKeyword(material, "_METALLICSPECGLOSSMAP", material.GetTexture("_MetallicGlossMap"));
         }
 
+        
         public static void UpdateStandardSpecularMaterialKeywords(Material material)
         {
             if (material == null)
@@ -263,6 +266,7 @@ namespace UnityEditor.Rendering.LWRP
             CoreUtils.SetKeyword(material, "_SPECULAR_SETUP", true);
         }
 
+        
         public StandardUpgrader(string oldShaderName)
         {
             if (oldShaderName == null)
