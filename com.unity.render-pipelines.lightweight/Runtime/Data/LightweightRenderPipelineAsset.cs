@@ -74,10 +74,14 @@ namespace UnityEngine.Rendering.LWRP
         PerPixel = 1,
     }
 
+    
     public enum ShaderVariantLogLevel
     {
+        
         Disabled,
+        
         OnlyLightweightRPShaders,
+        
         AllShaders,
     }
 
