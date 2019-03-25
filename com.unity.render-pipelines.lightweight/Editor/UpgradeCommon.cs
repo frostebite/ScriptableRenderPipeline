@@ -6,11 +6,16 @@ namespace UnityEditor.Rendering.LWRP
         Transparent
     }
 
+    
     public enum UpgradeBlendMode
     {
+        
         Alpha,
+        
         Premultiply,
+        
         Additive,
+        
         Multiply
     }
 
