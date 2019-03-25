@@ -1,3 +1,4 @@
+#Creating a new Project with LWRP
 **Note:** This page is subject to change during the 2019.1 beta cycle.
 
 # Using LWRP in a new Project
@@ -6,8 +7,8 @@ If you want to use the Lightweight Render Pipeline in a new Project, you can cre
 
 To create a Project using Templates:
 
-1. Open Unity. On the Home page, click __New__ to start a new Project. Under __Template__, select the Lightweight Render Pipeline template.
-2. Click __Create Project__. Unity automatically creates a new Project for you, complete with all the LWRP functions.
+1. Open Unity. On the Home page, click **New** to start a new Project. Under **Template**, select the Lightweight Render Pipeline template.
+2. Click **Create Project**. Unity automatically creates a new Project for you, complete with all the LWRP functions.
 
 For more information on using Templates, see [Project Templates](https://docs.unity3d.com/Manual/ProjectTemplates.html) in the Unity Manual.
 
