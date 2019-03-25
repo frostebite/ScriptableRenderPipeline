@@ -78,23 +78,36 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
 
         private static ReorderableList vertexStreamList;
         
+        
         public struct ParticleProperties
         {
             // Surface Option Props
+            
             public MaterialProperty colorMode;
 
             // Advanced Props
+            
             public MaterialProperty flipbookMode;
+            
             public MaterialProperty softParticlesEnabled;
+            
             public MaterialProperty cameraFadingEnabled;
+            
             public MaterialProperty distortionEnabled;
+            
             public MaterialProperty softParticlesNearFadeDistance;
+            
             public MaterialProperty softParticlesFarFadeDistance;
+            
             public MaterialProperty cameraNearFadeDistance;
+            
             public MaterialProperty cameraFarFadeDistance;
+            
             public MaterialProperty distortionBlend;
+            
             public MaterialProperty distortionStrength;
 
+            
             public ParticleProperties(MaterialProperty[] properties)
             {
                 // Surface Option Props
