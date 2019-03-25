@@ -17,10 +17,14 @@ namespace UnityEngine.Rendering.LWRP
         FourCascades,
     }
 
+    
     public enum ShadowQuality
     {
+        
         Disabled,
+        
         HardShadows,
+        
         SoftShadows,
     }
 
