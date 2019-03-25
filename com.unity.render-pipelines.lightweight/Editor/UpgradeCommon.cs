@@ -14,9 +14,12 @@ namespace UnityEditor.Rendering.LWRP
         Multiply
     }
 
+    
     public enum SpecularSource
     {
+        
         SpecularTextureAndColor,
+        
         NoSpecular
     }
 
