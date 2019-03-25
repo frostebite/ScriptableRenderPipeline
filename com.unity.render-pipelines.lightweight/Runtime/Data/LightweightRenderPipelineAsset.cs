@@ -81,9 +81,12 @@ namespace UnityEngine.Rendering.LWRP
         AllShaders,
     }
 
+    
     public enum RendererType
     {
+        
         Custom,
+        
         ForwardRenderer,
     }
 
