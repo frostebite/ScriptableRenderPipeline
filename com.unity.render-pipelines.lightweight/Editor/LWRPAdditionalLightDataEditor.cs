@@ -2,10 +2,12 @@ using UnityEngine.Rendering.LWRP;
 
 namespace UnityEditor.Rendering.LWRP
 {
+    
     [CanEditMultipleObjects]
     [CustomEditor(typeof(LWRPAdditionalLightData))]
     public class LWRPAdditionLightDataEditor : Editor
     {
+        
         public override void OnInspectorGUI()
         {
         }
