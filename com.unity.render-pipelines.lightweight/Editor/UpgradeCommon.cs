@@ -20,9 +20,12 @@ namespace UnityEditor.Rendering.LWRP
         NoSpecular
     }
 
+    
     public enum SmoothnessSource
     {
+        
         BaseAlpha,
+        
         SpecularAlpha
     }
 
