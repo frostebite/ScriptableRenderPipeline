@@ -3,6 +3,7 @@ using UnityEngine.Rendering.LWRP;
 
 namespace UnityEditor.Rendering.LWRP
 {
+    
     [CustomEditor(typeof(ForwardRendererData), true)]
     public class ForwardRendererDataEditor : ScriptableRendererDataEditor
     {
@@ -24,6 +25,7 @@ namespace UnityEditor.Rendering.LWRP
             m_DefaultStencilState = serializedObject.FindProperty("m_DefaultStencilState");
         }
 
+        
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
