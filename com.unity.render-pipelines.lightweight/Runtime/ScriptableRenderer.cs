@@ -5,36 +5,28 @@ using System.Linq;
 
 namespace UnityEngine.Rendering.LWRP
 {
-    /// <summary>
-    ///  Class <c>ScriptableRenderer</c> implements a rendering strategy. It describes how culling and lighting works and
-    /// the effects supported.
-    /// 
-    ///  A renderer can be used for all cameras or be overridden on a per-camera basis. It will implement light culling and setup
-    /// and describe a list of <c>ScriptableRenderPass</c> to execute in a frame. The renderer can be extended to support more effect with additional
-    ///  <c>ScriptableRendererFeature</c>. Resources for the renderer are serialized in <c>ScriptableRendererData</c>.
-    /// 
-    /// he renderer resources are serialized in <c>ScriptableRendererData</c>. 
-    /// <seealso cref="ScriptableRendererData"/>
-    /// <seealso cref="ScriptableRendererFeature"/>
-    /// <seealso cref="ScriptableRenderPass"/>
-    /// </summary>
-    public abstract class ScriptableRenderer
+    /// <!-- Badly formed XML comment ignored for member "T:UnityEngine.Rendering.LWRP.ScriptableRenderer" -->
+        public abstract class ScriptableRenderer
     {
+        
         public RenderTargetIdentifier cameraColorTarget
         {
             get => m_CameraColorTarget;
         }
 
+        
         public RenderTargetIdentifier cameraDepth
         {
             get => m_CameraDepthTarget;
         }
 
+        
         protected List<ScriptableRendererFeature> rendererFeatures
         {
             get => m_RendererFeatures;
         }
 
+        
         protected List<ScriptableRenderPass> activeRenderPassQueue
         {
             get => m_ActiveRenderPassQueue;
@@ -61,6 +53,7 @@ namespace UnityEngine.Rendering.LWRP
             m_ActiveDepthAttachment = depthAttachment;
         }
         
+        
         public ScriptableRenderer(ScriptableRendererData data)
         {
             foreach (var feature in data.rendererFeatures)
@@ -71,62 +64,62 @@ namespace UnityEngine.Rendering.LWRP
             Clear();
         }
 
-        /// <summary>
-        /// Configures the camera target.
-        /// </summary>
-        /// <param name="colorTarget">Camera color target. Pass BuiltinRenderTextureType.CameraTarget if rendering to backbuffer.</param>
-        /// <param name="depthTarget">Camera depth target. Pass BuiltinRenderTextureType.CameraTarget if color has depth or rendering to backbuffer.</param>
-        public void ConfigureCameraTarget(RenderTargetIdentifier colorTarget, RenderTargetIdentifier depthTarget)
+        ///     <summary>
+                ///     Configures the camera target.
+                ///     </summary>
+                ///     <param name="colorTarget">Camera color target. Pass BuiltinRenderTextureType.CameraTarget if rendering to backbuffer.</param>
+                ///     <param name="depthTarget">Camera depth target. Pass BuiltinRenderTextureType.CameraTarget if color has depth or rendering to backbuffer.</param>
+                        public void ConfigureCameraTarget(RenderTargetIdentifier colorTarget, RenderTargetIdentifier depthTarget)
         {
             m_CameraColorTarget = colorTarget;
             m_CameraDepthTarget = depthTarget;
         }
 
-        /// <summary>
-        /// Configures the render passes that will execute for this renderer.
-        /// This method is called per-camera every frame.
-        /// </summary>
-        /// <param name="context">Use this render context to issue any draw commands during execution.</param>
-        /// <param name="renderingData">Current render state information.</param>
-        /// <seealso cref="ScriptableRenderPass"/>
-        /// <seealso cref="ScriptableRendererFeature"/>
-        public abstract void Setup(ScriptableRenderContext context, ref RenderingData renderingData);
+        ///     <summary>
+                ///     Configures the render passes that will execute for this renderer.
+                ///     This method is called per-camera every frame.
+                ///     </summary>
+                ///     <param name="context">Use this render context to issue any draw commands during execution.</param>
+                ///     <param name="renderingData">Current render state information.</param>
+                ///     <seealso cref="T:UnityEngine.Rendering.LWRP.ScriptableRenderPass"/>
+                ///     <seealso cref="T:UnityEngine.Rendering.LWRP.ScriptableRendererFeature"/>
+                        public abstract void Setup(ScriptableRenderContext context, ref RenderingData renderingData);
 
-        /// <summary>
-        /// Override this method to implement the lighting setup for the renderer. You can use this to 
-        /// compute and upload light CBUFFER for example.
-        /// </summary>
-        /// <param name="context">Use this render context to issue any draw commands during execution.</param>
-        /// <param name="renderingData">Current render state information.</param>
-        public virtual void SetupLights(ScriptableRenderContext context, ref RenderingData renderingData)
+        ///     <summary>
+                ///     Override this method to implement the lighting setup for the renderer. You can use this to 
+                ///     compute and upload light CBUFFER for example.
+                ///     </summary>
+                ///     <param name="context">Use this render context to issue any draw commands during execution.</param>
+                ///     <param name="renderingData">Current render state information.</param>
+                        public virtual void SetupLights(ScriptableRenderContext context, ref RenderingData renderingData)
         {
         }
 
-        /// <summary>
-        /// Override this method to configure the culling parameters for the renderer. You can use this to configure if
-        /// lights should be culled per-object or the maximum shadow distance for example.
-        /// </summary>
-        /// <param name="cullingParameters">Use this to change culling parameters used by the render pipeline.</param>
-        /// <param name="cameraData">Current render state information.</param>
-        public virtual void SetupCullingParameters(ref ScriptableCullingParameters cullingParameters,
+        ///     <summary>
+                ///     Override this method to configure the culling parameters for the renderer. You can use this to configure if
+                ///     lights should be culled per-object or the maximum shadow distance for example.
+                ///     </summary>
+                ///     <param name="cullingParameters">Use this to change culling parameters used by the render pipeline.</param>
+                ///     <param name="cameraData">Current render state information.</param>
+                        public virtual void SetupCullingParameters(ref ScriptableCullingParameters cullingParameters,
             ref CameraData cameraData)
         {
         }
 
-        /// <summary>
-        /// Called upon finishing camera rendering. You can release any resources created on setup here.
-        /// </summary>
-        /// <param name="cmd"></param>
-        public virtual void FinishRendering(CommandBuffer cmd)
+        ///     <summary>
+                ///     Called upon finishing camera rendering. You can release any resources created on setup here.
+                ///     </summary>
+                ///     <param name="cmd"></param>
+                        public virtual void FinishRendering(CommandBuffer cmd)
         {
         }
 
-        /// <summary>
-        /// Execute the enqueued render passes. This automatically handles editor and stereo rendering.
-        /// </summary>
-        /// <param name="context">Use this render context to issue any draw commands during execution.</param>
-        /// <param name="renderingData">Current render state information.</param>
-        public void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+        ///     <summary>
+                ///     Execute the enqueued render passes. This automatically handles editor and stereo rendering.
+                ///     </summary>
+                ///     <param name="context">Use this render context to issue any draw commands during execution.</param>
+                ///     <param name="renderingData">Current render state information.</param>
+                        public void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             Camera camera = renderingData.cameraData.camera;
             ClearRenderState(context);
@@ -169,21 +162,21 @@ namespace UnityEngine.Rendering.LWRP
             InternalFinishRendering(context);
         }
 
-        /// <summary>
-        /// Enqueues a render pass for execution.
-        /// </summary>
-        /// <param name="pass">Render pass to be enqueued.</param>
-        public void EnqueuePass(ScriptableRenderPass pass)
+        ///     <summary>
+                ///     Enqueues a render pass for execution.
+                ///     </summary>
+                ///     <param name="pass">Render pass to be enqueued.</param>
+                        public void EnqueuePass(ScriptableRenderPass pass)
         {
             m_ActiveRenderPassQueue.Add(pass);
         }
 
-        /// <summary>
-        /// Returns a clear flag based on CameraClearFlags.
-        /// </summary>
-        /// <param name="cameraClearFlags">Camera clear flags.</param>
-        /// <returns>A clear flag that tells if color and/or depth should be cleared.</returns>
-        protected static ClearFlag GetCameraClearFlag(CameraClearFlags cameraClearFlags)
+        ///     <summary>
+        ///     Returns a clear flag based on CameraClearFlags.
+        ///     </summary>
+        ///     <param name="cameraClearFlags">Camera clear flags.</param>
+        ///     <returns>A clear flag that tells if color and/or depth should be cleared.</returns>
+                protected static ClearFlag GetCameraClearFlag(CameraClearFlags cameraClearFlags)
         {
 #if UNITY_EDITOR
             // We need public API to tell if FrameDebugger is active and enabled. In that case
