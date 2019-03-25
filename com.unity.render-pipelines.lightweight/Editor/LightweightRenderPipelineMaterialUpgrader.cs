@@ -358,8 +358,10 @@ namespace UnityEditor.Rendering.LWRP
         }
     }
 
+    
     public class ParticleUpgrader : MaterialUpgrader
     {
+        
         public ParticleUpgrader(string oldShaderName)
         {
             if (oldShaderName == null)
@@ -383,16 +385,19 @@ namespace UnityEditor.Rendering.LWRP
             RenameFloat("_FlipbookMode", "_FlipbookBlending");
         }
 
+        
         public static void UpdateStandardSurface(Material material)
         {
             UpdateSurfaceBlendModes(material);
         }
 
+        
         public static void UpdateUnlit(Material material)
         {
             UpdateSurfaceBlendModes(material);
         }
 
+        
         public static void UpdateSurfaceBlendModes(Material material)
         {
             switch (material.GetFloat("_Mode"))
