@@ -19,60 +19,83 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             Difference
         }
 
+        
         public static class Styles
         {
+            
             public static GUIContent colorMode = new GUIContent("Color Mode",
                 "Controls how the Particle color and the Material color blend together.");
 
+            
             public static GUIContent flipbookMode = new GUIContent("Flip-Book Blending",
                 "Blends the frames in a flip-book together in a smooth animation.");
 
+            
             public static GUIContent softParticlesEnabled = new GUIContent("Soft Particles",
                 "Makes particles fade out when they get close to intersecting with the surface of other geometry in the depth buffer.");
 
+            
             public static GUIContent softParticlesNearFadeDistanceText =
                 new GUIContent("Near",
                     "The distance from the other surface where the particle is completely transparent.");
 
+            
             public static GUIContent softParticlesFarFadeDistanceText =
                 new GUIContent("Far",
                     "The distance from the other surface where the particle is completely opaque.");
 
+            
             public static GUIContent cameraFadingEnabled = new GUIContent("Camera Fading",
                 "Makes particles fade out when they get close to the camera.");
 
+            
             public static GUIContent cameraNearFadeDistanceText =
                 new GUIContent("Near",
                     "The distance from the camera where the particle is completely transparent.");
 
+            
             public static GUIContent cameraFarFadeDistanceText =
                 new GUIContent("Far", "The distance from the camera where the particle is completely opaque.");
 
+            
             public static GUIContent distortionEnabled = new GUIContent("Distortion",
                 "Creates a distortion effect by making particles perform refraction with the objects drawn before them.");
 
+            
             public static GUIContent distortionStrength = new GUIContent("Strength",
                 "Controls how much the Particle distorts the background. ");
 
+            
             public static GUIContent distortionBlend = new GUIContent("Blend",
                 "Controls how visible the distortion effect is. At 0, there’s no visible distortion. At 1, only the distortion effect is visible, not the background.");
 
+            
             public static GUIContent VertexStreams = new GUIContent("Vertex Streams",
                 "The vertex streams needed for this Material to function properly.");
 
+            
             public static string streamPositionText = "Position (POSITION.xyz)";
+            
             public static string streamNormalText = "Normal (NORMAL.xyz)";
+            
             public static string streamColorText = "Color (COLOR.xyzw)";
+            
             public static string streamUVText = "UV (TEXCOORD0.xy)";
+            
             public static string streamUV2Text = "UV2 (TEXCOORD0.zw)";
+            
             public static string streamAnimBlendText = "AnimBlend (TEXCOORD1.x)";
+            
             public static string streamTangentText = "Tangent (TANGENT.xyzw)";
 
+            
             public static GUIContent streamApplyToAllSystemsText = new GUIContent("Fix Now",
                 "Apply the vertex stream layout to all Particle Systems using this material");
             
+            
             public static string undoApplyCustomVertexStreams = L10n.Tr("Apply custom vertex streams from material");
 
+            
             public static GUIStyle vertexStreamIcon = new GUIStyle();
         }
 
