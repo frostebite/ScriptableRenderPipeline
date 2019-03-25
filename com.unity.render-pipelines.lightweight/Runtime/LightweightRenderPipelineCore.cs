@@ -5,10 +5,14 @@ using UnityEngine.Rendering.PostProcessing;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public enum MixedLightingSetup
     {
+        
         None,
+        
         ShadowMask,
+        
         Subtractive,
     };
 
