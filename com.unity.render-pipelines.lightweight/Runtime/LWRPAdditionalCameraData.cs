@@ -15,6 +15,7 @@ namespace UnityEngine.Rendering.LWRP
         UsePipelineSettings,
     }
 
+    
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Camera))]
     [ImageEffectAllowedInSceneView]
@@ -45,26 +46,31 @@ namespace UnityEngine.Rendering.LWRP
 
         [HideInInspector] [SerializeField] float m_Version = 2;
 
+        
         public float version => m_Version;
 
+        
         public bool renderShadows
         {
             get => m_RenderShadows;
             set => m_RenderShadows = value;
         }
 
+        
         public CameraOverrideOption requiresDepthOption
         {
             get { return m_RequiresDepthTextureOption; }
             set { m_RequiresDepthTextureOption = value; }
         }
 
+        
         public CameraOverrideOption requiresColorOption
         {
             get { return m_RequiresOpaqueTextureOption; }
             set { m_RequiresOpaqueTextureOption = value; }
         }
 
+        
         public bool requiresDepthTexture
         {
             get
@@ -82,6 +88,7 @@ namespace UnityEngine.Rendering.LWRP
             set { m_RequiresDepthTextureOption = (value) ? CameraOverrideOption.On : CameraOverrideOption.Off; }
         }
 
+        
         public bool requiresColorTexture
         {
             get
@@ -99,6 +106,7 @@ namespace UnityEngine.Rendering.LWRP
             set { m_RequiresOpaqueTextureOption = (value) ? CameraOverrideOption.On : CameraOverrideOption.Off; }
         }
 
+        
         public ScriptableRenderer scriptableRenderer
         {
             get
@@ -113,10 +121,12 @@ namespace UnityEngine.Rendering.LWRP
             }
         }
 
+        
         public void OnBeforeSerialize()
         {
         }
 
+        
         public void OnAfterDeserialize()
         {
             if (version <= 1)
