@@ -51,27 +51,42 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             public static readonly string[] specularSmoothnessChannelNames = {"Specular Alpha", "Albedo Alpha"};
         }
 
+        
         public struct LitProperties
         {
             // Surface Option Props
+            
             public MaterialProperty workflowMode;
 
             // Surface Input Props
+            
             public MaterialProperty metallic;
+            
             public MaterialProperty specColor;
+            
             public MaterialProperty metallicGlossMap;
+            
             public MaterialProperty specGlossMap;
+            
             public MaterialProperty smoothness;
+            
             public MaterialProperty smoothnessMapChannel;
+            
             public MaterialProperty bumpMapProp;
+            
             public MaterialProperty bumpScaleProp;
+            
             public MaterialProperty occlusionStrength;
+            
             public MaterialProperty occlusionMap;
 
             // Advanced Props
+            
             public MaterialProperty highlights;
+            
             public MaterialProperty reflections;
 
+            
             public LitProperties(MaterialProperty[] properties)
             {
                 // Surface Option Props
