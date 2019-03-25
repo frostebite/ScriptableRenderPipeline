@@ -426,13 +426,16 @@ namespace UnityEditor.Rendering.LWRP
         }
     }
 
+    
     public class AutodeskInteractiveUpgrader : MaterialUpgrader
     {
+        
         public AutodeskInteractiveUpgrader(string oldShaderName)
         {
             RenameShader(oldShaderName, "Lightweight Render Pipeline/Autodesk Interactive/Autodesk Interactive");
         }
 
+        
         public override void Convert(Material srcMaterial, Material dstMaterial)
         {
             base.Convert(srcMaterial, dstMaterial);
