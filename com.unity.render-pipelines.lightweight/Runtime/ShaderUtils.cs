@@ -3,16 +3,26 @@ using System.Linq;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public enum ShaderPathID
     {
+        
         Lit,
+        
         SimpleLit,
+        
         Unlit,
+        
         TerrainLit,
+        
         ParticlesLit,
+        
         ParticlesSimpleLit,
+        
         ParticlesUnlit,
+        
         BakedLit,
+        
         Count
     }
 
