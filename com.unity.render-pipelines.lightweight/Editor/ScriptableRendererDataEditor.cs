@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace UnityEditor.Rendering.LWRP
 {
+    
     [CustomEditor(typeof(ScriptableRendererData), true)]
     public class ScriptableRendererDataEditor : Editor
     {
@@ -162,6 +163,7 @@ namespace UnityEditor.Rendering.LWRP
             };
         }
 
+        
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
