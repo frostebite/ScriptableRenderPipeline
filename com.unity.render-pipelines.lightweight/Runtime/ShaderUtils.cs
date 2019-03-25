@@ -16,6 +16,7 @@ namespace UnityEngine.Rendering.LWRP
         Count
     }
 
+    
     public static class ShaderUtils
     {
         static readonly string[] s_ShaderPaths  =
@@ -30,6 +31,7 @@ namespace UnityEngine.Rendering.LWRP
             "Lightweight Render Pipeline/Baked Lit",
         };
 
+        
         public static string GetShaderPath(ShaderPathID id)
         {
             int index = (int)id;
@@ -42,12 +44,14 @@ namespace UnityEngine.Rendering.LWRP
             return s_ShaderPaths[index];
         }
         
+        
         public static ShaderPathID GetEnumFromPath(string path)
         {
             var index = Array.FindIndex(s_ShaderPaths, m => m == path);
             return (ShaderPathID)index;
         }
 
+        
         public static bool IsLWShader(Shader shader)
         {
             return s_ShaderPaths.Contains(shader.name);
