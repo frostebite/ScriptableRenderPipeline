@@ -33,12 +33,18 @@ namespace UnityEditor.Rendering.LWRP
         ReflectionProbe
     }
 
+    
     public struct UpgradeParams
     {
+        
         public UpgradeSurfaceType surfaceType { get; set; }
+        
         public UpgradeBlendMode blendMode { get; set; }
+        
         public bool alphaClip { get; set; }
+        
         public SpecularSource specularSource { get; set; }
+        
         public SmoothnessSource smoothnessSource { get; set; }
     }
 }
