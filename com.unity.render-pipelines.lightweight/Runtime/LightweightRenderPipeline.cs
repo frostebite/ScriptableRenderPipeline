@@ -10,6 +10,7 @@ using Lightmapping = UnityEngine.Experimental.GlobalIllumination.Lightmapping;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public sealed partial class LightweightRenderPipeline : RenderPipeline
     {
         static class PerFrameBuffer
@@ -25,20 +26,24 @@ namespace UnityEngine.Rendering.LWRP
             public static int _ScaledScreenParams;
         }
 
+        
         public const string k_ShaderTagName = "LightweightPipeline";
 
         const string k_RenderCameraTag = "Render Camera";
 
+        
         public static float maxShadowBias
         {
             get => 10.0f;
         }
 
+        
         public static float minRenderScale
         {
             get => 0.1f;
         }
 
+        
         public static float maxRenderScale
         {
             get => 4.0f;
@@ -46,6 +51,7 @@ namespace UnityEngine.Rendering.LWRP
 
         // Amount of Lights that can be shaded per object (in the for loop in the shader)
         // This uses unity_4LightIndices to store an array of 4 light indices
+        
         public static int maxPerObjectLights
         {
             get => 4;
@@ -53,11 +59,13 @@ namespace UnityEngine.Rendering.LWRP
 
         // Light data is stored in a constant buffer (uniform array)
         // This value has to match MAX_VISIBLE_LIGHTS in Input.hlsl
+        
         public static int maxVisibleAdditionalLights
         {
             get => 16;
         }
 
+        
         public static LightweightRenderPipelineAsset asset
         {
             get
@@ -66,6 +74,7 @@ namespace UnityEngine.Rendering.LWRP
             }
         }
 
+        
         public LightweightRenderPipeline(LightweightRenderPipelineAsset asset)
         {
             SetSupportedRenderingFeatures();
@@ -87,6 +96,7 @@ namespace UnityEngine.Rendering.LWRP
             CameraCaptureBridge.enabled = true;
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
@@ -101,6 +111,7 @@ namespace UnityEngine.Rendering.LWRP
             CameraCaptureBridge.enabled = false;
         }
 
+        
         protected override void Render(ScriptableRenderContext renderContext, Camera[] cameras)
         {
             BeginFrameRendering(renderContext, cameras);
@@ -123,6 +134,7 @@ namespace UnityEngine.Rendering.LWRP
             EndFrameRendering(renderContext, cameras);
         }
 
+        
         public static void RenderSingleCamera(ScriptableRenderContext context, Camera camera)
         {
             if (!camera.TryGetCullingParameters(IsStereoEnabled(camera), out var cullingParameters))

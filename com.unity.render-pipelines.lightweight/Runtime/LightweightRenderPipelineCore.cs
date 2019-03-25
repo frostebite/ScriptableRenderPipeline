@@ -114,6 +114,7 @@ namespace UnityEngine.Rendering.LWRP
     {
         static List<Vector4> m_ShadowBiasData = new List<Vector4>();
 
+        
         public static bool IsStereoEnabled(Camera camera)
         {
             if (camera == null)
