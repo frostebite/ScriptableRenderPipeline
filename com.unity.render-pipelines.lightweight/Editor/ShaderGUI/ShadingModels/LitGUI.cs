@@ -7,9 +7,12 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
     
     public static class LitGUI
     {
+        
         public enum WorkflowMode
         {
+            
             Specular = 0,
+            
             Metallic
         }
 
