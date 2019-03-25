@@ -2,10 +2,14 @@ using UnityEngine.Serialization;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public enum CameraOverrideOption
     {
+        
         Off,
+        
         On,
+        
         UsePipelineSettings,
     }
 
