@@ -100,21 +100,34 @@ namespace UnityEngine.Rendering.LWRP
         public List<Vector4> bias;
     }
 
+    
     public static class ShaderKeywordStrings
     {
+        
         public static readonly string MainLightShadows = "_MAIN_LIGHT_SHADOWS";
+        
         public static readonly string MainLightShadowCascades = "_MAIN_LIGHT_SHADOWS_CASCADE";
+        
         public static readonly string AdditionalLightsVertex = "_ADDITIONAL_LIGHTS_VERTEX";
+        
         public static readonly string AdditionalLightsPixel = "_ADDITIONAL_LIGHTS";
+        
         public static readonly string AdditionalLightShadows = "_ADDITIONAL_LIGHT_SHADOWS";
+        
         public static readonly string SoftShadows = "_SHADOWS_SOFT";
+        
         public static readonly string MixedLightingSubtractive = "_MIXED_LIGHTING_SUBTRACTIVE";
 
+        
         public static readonly string DepthNoMsaa = "_DEPTH_NO_MSAA";
+        
         public static readonly string DepthMsaa2 = "_DEPTH_MSAA_2";
+        
         public static readonly string DepthMsaa4 = "_DEPTH_MSAA_4";
 
+        
         public static readonly string LinearToSRGBConversion = "_LINEAR_TO_SRGB_CONVERSION";
+        
         public static readonly string KillAlpha = "_KILL_ALPHA";
     }
 
