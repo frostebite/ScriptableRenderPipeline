@@ -1,3 +1,4 @@
+#Configuring LWRP for use
 **Note:** This page is subject to change during the 2019.1 beta cycle.
 
 # Configuring LWRP for use
@@ -16,7 +17,7 @@ The Scriptable Render Pipeline Asset controls the [global rendering and quality 
 To create a Lightweight Render Pipeline Asset:
 
 1. In the Editor, go to the Project window.
-2. Right-click in the Project window, and select  __Create__ &gt; __Rendering__ > __Lightweight__ __Render Pipeline Asset__. Alternatively, navigate to the menu bar in top, and click __Assets__ > __Create__ > __Rendering__ > __Lightweight Render Pipeline Asset__.
+2. Right-click in the Project window, and select  **Create** &gt; **Rendering** > **Lightweight** **Render Pipeline Asset**. Alternatively, navigate to the menu bar in top, and click **Assets** > **Create** > **Rendering** > **Lightweight Render Pipeline Asset**.
 3. Either leave the default name for the Asset, or type a new one. You've now created a LWRP Asset.
 
 **Tip:** You can create multiple LWRP Assets to store settings for different platforms or for different testing environments. Once you've started using LWRP, try swapping out LWRP Assets under Graphics settings and test the combinations, to see what fits your Project or platforms best. You cannot swap LWRP Assets for other types of render pipeline assets, though.
@@ -27,7 +28,7 @@ To create a Lightweight Render Pipeline Asset:
 
 To use the Lightweight Render Pipeline, you have to add the newly created LWRP Asset to your Graphics settings in Unity. If you don't, Unity still tries to use the built-in render pipeline.
 
-1. Navigate to __Edit__ > __Project Settings__ > __Graphics__. 
-2. In the __Render Pipeline Settings__ field, add the LWRP Asset you created earlier.
+1. Navigate to **Edit** > **Project Settings** > **Graphics**. 
+2. In the **Render Pipeline Settings** field, add the LWRP Asset you created earlier.
 
 **Note:** When you add the LWRP Asset, the available settings in LWRP immediately changes. This is because you've effectively instructed Unity to use the LWRP specific settings instead of those for the built-in render pipeline.
