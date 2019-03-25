@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.LWRP.ShaderGUI
 {
+    
     public static class LitGUI
     {
         public enum WorkflowMode
@@ -92,6 +93,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
 
+        
         public static void Inputs(LitProperties properties, MaterialEditor materialEditor, Material material)
         {
             DoMetallicSpecularArea(properties, materialEditor, material);
@@ -104,6 +106,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
 
+        
         public static void DoMetallicSpecularArea(LitProperties properties, MaterialEditor materialEditor, Material material)
         {
             string[] smoothnessChannelNames;
@@ -128,6 +131,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             EditorGUI.indentLevel--;
         }
 
+        
         public static void DoSmoothness(LitProperties properties, Material material, string[] smoothnessChannelNames)
         {
             var opaque = ((BaseShaderGUI.SurfaceType) material.GetFloat("_Surface") ==
@@ -161,6 +165,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             EditorGUI.indentLevel--;
         }
 
+        
         public static SmoothnessMapChannel GetSmoothnessMapChannel(Material material)
         {
             int ch = (int) material.GetFloat("_SmoothnessTextureChannel");
@@ -170,6 +175,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             return SmoothnessMapChannel.SpecularMetallicAlpha;
         }
 
+        
         public static void SetMaterialKeywords(Material material)
         {
             // Note: keywords must be based on Material value not on MaterialProperty due to multi-edit & material animation
