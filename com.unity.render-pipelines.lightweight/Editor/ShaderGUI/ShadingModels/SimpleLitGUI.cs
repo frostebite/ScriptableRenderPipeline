@@ -7,9 +7,12 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
     
     public static class SimpleLitGUI
     {
+        
         public enum SpecularSource
         {
+            
             SpecularTextureAndColor,
+            
             NoSpecular
         }
         
