@@ -4,6 +4,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public static class RenderingUtils
     {
         static int m_PostProcessingTemporaryTargetId = Shader.PropertyToID("_TemporaryColorTexture");
@@ -19,6 +20,7 @@ namespace UnityEngine.Rendering.LWRP
         };
 
         static Mesh s_FullscreenMesh = null;
+        
         public static Mesh fullscreenMesh
         {
             get
@@ -53,6 +55,7 @@ namespace UnityEngine.Rendering.LWRP
         }
 
         static PostProcessRenderContext m_PostProcessRenderContext;
+        
         public static PostProcessRenderContext postProcessRenderContext
         {
             get
