@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.LWRP.ShaderGUI
 {
+    
     public static class BakedLitGUI
     {
         public struct BakedLitProperties
@@ -18,6 +19,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
 
+        
         public static void Inputs(BakedLitProperties properties, MaterialEditor materialEditor)
         {
             BaseShaderGUI.DrawNormalArea(materialEditor, properties.bumpMapProp);
