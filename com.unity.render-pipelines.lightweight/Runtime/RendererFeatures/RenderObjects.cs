@@ -4,9 +4,12 @@ using UnityEngine.Rendering;
 
 namespace UnityEngine.Experimental.Rendering.LWRP
 {
+    
     public enum RenderQueueType
     {
+        
         Opaque,
+        
         Transparent,
     }
 
