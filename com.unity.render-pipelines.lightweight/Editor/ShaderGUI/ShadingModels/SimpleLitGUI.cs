@@ -35,16 +35,24 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
                 "When enabled, the Material reflects the shine from direct lighting.");
         }
 
+        
         public struct SimpleLitProperties
         {
             // Surface Input Props
+            
             public MaterialProperty specColor;
+            
             public MaterialProperty specGlossMap;
+            
             public MaterialProperty specHighlights;
+            
             public MaterialProperty smoothnessMapChannel;
+            
             public MaterialProperty smoothness;
+            
             public MaterialProperty bumpMapProp;
 
+            
             public SimpleLitProperties(MaterialProperty[] properties)
             {
                 // Surface Input Props
