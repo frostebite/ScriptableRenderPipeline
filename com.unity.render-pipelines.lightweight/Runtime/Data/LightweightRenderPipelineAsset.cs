@@ -37,11 +37,16 @@ namespace UnityEngine.Rendering.LWRP
         _8x = 8
     }
 
+    
     public enum Downsampling
     {
+        
         None,
+        
         _2xBilinear,
+        
         _4xBox,
+        
         _4xBilinear
     }
 
