@@ -1,8 +1,11 @@
 namespace UnityEditor.Rendering.LWRP
 {
+    
     public enum UpgradeSurfaceType
     {
+        
         Opaque,
+        
         Transparent
     }
 
