@@ -48,12 +48,17 @@ namespace UnityEngine.Experimental.Rendering.LWRP
             }
         }
 
+        
         [System.Serializable]
         public class CustomCameraSettings
         {
+            
             public bool overrideCamera = false;
+            
             public bool restoreCamera = true;
+            
             public Vector4 offset;
+            
             public float cameraFieldOfView = 60.0f;
         }
 
