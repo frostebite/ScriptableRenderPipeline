@@ -12,14 +12,22 @@ namespace UnityEngine.Rendering.LWRP
         Subtractive,
     };
 
+    
     public struct RenderingData
     {
+        
         public CullingResults cullResults;
+        
         public CameraData cameraData;
+        
         public LightData lightData;
+        
         public ShadowData shadowData;
+        
         public bool supportsDynamicBatching;
+        
         public PerObjectData perObjectData;
+        
         public bool killAlphaInFinalBlit;
     }
 
