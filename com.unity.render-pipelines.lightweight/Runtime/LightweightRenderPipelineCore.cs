@@ -33,24 +33,39 @@ namespace UnityEngine.Rendering.LWRP
         public bool supportsMixedLighting;
     }
 
+    
     public struct CameraData
     {
+        
         public Camera camera;
+        
         public RenderTextureDescriptor cameraTargetDescriptor;
+        
         public float renderScale;
+        
         public bool isSceneViewCamera;
+        
         public bool isDefaultViewport;
+        
         public bool isHdrEnabled;
+        
         public bool requiresDepthTexture;
+        
         public bool requiresOpaqueTexture;
 
+        
         public SortingCriteria defaultOpaqueSortFlags;
 
+        
         public bool isStereoEnabled;
 
+        
         public float maxShadowDistance;
+        
         public bool postProcessEnabled;
+        
         public PostProcessLayer postProcessLayer;
+        
         public IEnumerator<Action<RenderTargetIdentifier, CommandBuffer> > captureActions;
     }
 
