@@ -9,13 +9,20 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
     
     public static class ParticleGUI
     {
+        
         public enum ColorMode
         {
+            
             Multiply,
+            
             Additive,
+            
             Subtractive,
+            
             Overlay,
+            
             Color,
+            
             Difference
         }
 
