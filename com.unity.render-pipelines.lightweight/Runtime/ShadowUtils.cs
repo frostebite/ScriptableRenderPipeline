@@ -2,15 +2,23 @@ using System;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public struct ShadowSliceData
     {
+        
         public Matrix4x4 viewMatrix;
+        
         public Matrix4x4 projectionMatrix;
+        
         public Matrix4x4 shadowTransform;
+        
         public int offsetX;
+        
         public int offsetY;
+        
         public int resolution;
 
+        
         public void Clear()
         {
             viewMatrix = Matrix4x4.identity;
