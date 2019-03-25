@@ -5,6 +5,7 @@ using UnityEditor.Rendering;
 
 namespace UnityEditor
 {
+    
     public abstract class BaseShaderGUI : ShaderGUI
     {
         #region EnumsAndClasses
@@ -89,32 +90,45 @@ namespace UnityEditor
 
         #region Variables
 
+        
         protected MaterialEditor materialEditor { get; set; }
 
+        
         protected MaterialProperty surfaceTypeProp { get; set; }
 
+        
         protected MaterialProperty blendModeProp { get; set; }
 
+        
         protected MaterialProperty cullingProp { get; set; }
 
+        
         protected MaterialProperty alphaClipProp { get; set; }
 
+        
         protected MaterialProperty alphaCutoffProp { get; set; }
 
+        
         protected MaterialProperty receiveShadowsProp { get; set; }
 
         // Common Surface Input properties
 
+        
         protected MaterialProperty baseMapProp { get; set; }
 
+        
         protected MaterialProperty baseColorProp { get; set; }
 
+        
         protected MaterialProperty emissionMapProp { get; set; }
 
+        
         protected MaterialProperty emissionColorProp { get; set; }
 
+        
         protected MaterialProperty queueOffsetProp { get; set; }
 
+        
         public bool m_FirstTimeApply = true;
 
         private const string k_KeyPrefix = "LightweightRP:Material:UI_State:";
@@ -137,8 +151,10 @@ namespace UnityEditor
         ////////////////////////////////////
         #region GeneralFunctions
 
+        
         public abstract void MaterialChanged(Material material);
 
+        
         public virtual void FindProperties(MaterialProperty[] properties)
         {
             surfaceTypeProp = FindProperty("_Surface", properties);
@@ -154,6 +170,7 @@ namespace UnityEditor
             queueOffsetProp = FindProperty("_QueueOffset", properties, false);
         }
 
+        
         public override void OnGUI(MaterialEditor materialEditorIn, MaterialProperty[] properties)
         {
             if (materialEditorIn == null)
@@ -174,6 +191,7 @@ namespace UnityEditor
             ShaderPropertiesGUI(material);
         }
 
+        
         public virtual void OnOpenGUI(Material material, MaterialEditor materialEditor)
         {
             // Foldout states
@@ -186,6 +204,7 @@ namespace UnityEditor
                 MaterialChanged((Material)obj);
         }
 
+        
         public void ShaderPropertiesGUI(Material material)
         {
             if (material == null)
@@ -231,6 +250,7 @@ namespace UnityEditor
         ////////////////////////////////////
         #region DrawingFunctions
 
+        
         public virtual void DrawSurfaceOptions(Material material)
         {
             DoPopup(Styles.surfaceType, surfaceTypeProp, Enum.GetNames(typeof(SurfaceType)));
@@ -272,11 +292,13 @@ namespace UnityEditor
             }
         }
 
+        
         public virtual void DrawSurfaceInputs(Material material)
         {
             DrawBaseProperties(material);
         }
 
+        
         public virtual void DrawAdvancedOptions(Material material)
         {
             materialEditor.EnableInstancingField();
@@ -292,8 +314,10 @@ namespace UnityEditor
             }
         }
 
+        
         public virtual void DrawAdditionalFoldouts(Material material){}
 
+        
         public virtual void DrawBaseProperties(Material material)
         {
             if (baseMapProp != null && baseColorProp != null) // Draw the baseMap, most shader will have at least a baseMap
@@ -304,6 +328,7 @@ namespace UnityEditor
             }
         }
 
+        
         protected virtual void DrawEmissionProperties(Material material, bool keyword)
         {
             var emissive = true;
@@ -343,6 +368,7 @@ namespace UnityEditor
             }
         }
 
+        
         public static void DrawNormalArea(MaterialEditor materialEditor, MaterialProperty bumpMap, MaterialProperty bumpMapScale = null)
         {
             if (bumpMapScale != null)
@@ -361,6 +387,7 @@ namespace UnityEditor
             }
         }
 
+        
         protected static void DrawTileOffset(MaterialEditor materialEditor, MaterialProperty textureProp)
         {
             materialEditor.TextureScaleOffsetProperty(textureProp);
@@ -372,6 +399,7 @@ namespace UnityEditor
         ////////////////////////////////////
         #region MaterialDataFunctions
 
+        
         public static void SetMaterialKeywords(Material material, Action<Material> shadingModelFunc = null, Action<Material> shaderFunc = null)
         {
             // Clear all keywords for fresh start
@@ -397,6 +425,7 @@ namespace UnityEditor
             shaderFunc?.Invoke(material);
         }
 
+        
         public static void SetupMaterialBlendMode(Material material)
         {
             if (material == null)
@@ -480,6 +509,7 @@ namespace UnityEditor
         ////////////////////////////////////
         #region HelperFunctions
 
+        
         public static void TwoFloatSingleLine(GUIContent title, MaterialProperty prop1, GUIContent prop1Label,
             MaterialProperty prop2, GUIContent prop2Label, MaterialEditor materialEditor, float labelWidth = 30f)
         {
@@ -512,11 +542,13 @@ namespace UnityEditor
             EditorGUI.showMixedValue = false;
         }
         
+        
         public void DoPopup(GUIContent label, MaterialProperty property, string[] options)
         {
             DoPopup(label, property, options, materialEditor);
         }
 
+        
         public static void DoPopup(GUIContent label, MaterialProperty property, string[] options, MaterialEditor materialEditor)
         {
             if (property == null)
@@ -537,6 +569,7 @@ namespace UnityEditor
         }
         
         // Helper to show texture and color properties
+        
         public static Rect TextureColorProps(MaterialEditor materialEditor, GUIContent label, MaterialProperty textureProp, MaterialProperty colorProp, bool hdr = false)
         {
             Rect rect = EditorGUILayout.GetControlRect();
@@ -568,6 +601,7 @@ namespace UnityEditor
 
         // Copied from shaderGUI as it is a protected function in an abstract class, unavailable to others
 
+        
         public new static MaterialProperty FindProperty(string propertyName, MaterialProperty[] properties)
         {
             return FindProperty(propertyName, properties, true);
@@ -575,6 +609,7 @@ namespace UnityEditor
 
         // Copied from shaderGUI as it is a protected function in an abstract class, unavailable to others
 
+        
         public new static MaterialProperty FindProperty(string propertyName, MaterialProperty[] properties, bool propertyIsMandatory)
         {
             for (int index = 0; index < properties.Length; ++index)
