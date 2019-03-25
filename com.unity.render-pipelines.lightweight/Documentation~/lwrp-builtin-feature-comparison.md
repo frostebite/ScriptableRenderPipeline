@@ -2,7 +2,7 @@
 
 This table provides an overview of the current features supported in the Lightweight Render Pipeline (LWRP), compared to the Unity Built-in render pipeline. 
 
-**Note:** If a feature is marked __In research__, the LWRP team is still researching how and when to implement the feature. If a feature is marked as __Not supported__, it's because Unity is not planning to support it in any release. 
+**Note:** If a feature is marked **In research**, the LWRP team is still researching how and when to implement the feature. If a feature is marked as **Not supported**, it's because Unity is not planning to support it in any release. 
 
 
 | Feature                                                      | Unity Built-in render pipeline                               | Lightweight Render Pipeline                                  |
