@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.LWRP.ShaderGUI
 {
+    
     public static class ParticleGUI
     {
         public enum ColorMode
@@ -112,6 +113,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
         
+        
         public static void SetupMaterialWithColorMode(Material material)
         {
             var colorMode = (ColorMode) material.GetFloat("_ColorMode");
@@ -153,6 +155,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
                     break;
             }
         }
+        
         
         public static void FadingOptions(Material material, MaterialEditor materialEditor, ParticleProperties properties)
         {
@@ -243,6 +246,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
         
+        
         public static void DoVertexStreamsArea(Material material, List<ParticleSystemRenderer> renderers, bool useLighting = false)
         {
             EditorGUILayout.Space();
@@ -318,6 +322,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
                 }
             }
         }
+        
         
         public static void SetMaterialKeywords(Material material)
         {
