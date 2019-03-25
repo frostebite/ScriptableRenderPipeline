@@ -4,6 +4,7 @@ using UnityEngine.Rendering.LWRP;
 
 namespace UnityEditor
 {
+	
 	[LightingExplorerExtensionAttribute(typeof(LightweightRenderPipelineAsset))]
 	public class LightExplorer : DefaultLightingExplorerExtension
 	{
@@ -31,6 +32,7 @@ namespace UnityEditor
 																				EditorGUIUtility.TrTextContent("2048") };
 	        public static readonly int[] ReflectionProbeSizeValues = { 16, 32, 64, 128, 256, 512, 1024, 2048 };
         }
+		
 		
 		protected override LightingExplorerTableColumn[] GetReflectionProbeColumns()
 		{
