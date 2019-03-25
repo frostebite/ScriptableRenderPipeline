@@ -1,3 +1,6 @@
+Unity Manual ToC
+================
+
 * [About LWRP](index.md)
 * [Getting started with LWRP](getting-started-with-lwrp.md)
   * [Creating a new Project with LWRP](creating-a-new-project-with-lwrp.md)
