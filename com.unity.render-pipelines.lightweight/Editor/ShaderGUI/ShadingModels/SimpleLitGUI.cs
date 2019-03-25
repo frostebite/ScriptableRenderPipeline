@@ -13,9 +13,12 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             NoSpecular
         }
         
+        
         public enum SmoothnessMapChannel
         {
+            
             SpecularAlpha,
+            
             AlbedoAlpha,
         }
 
