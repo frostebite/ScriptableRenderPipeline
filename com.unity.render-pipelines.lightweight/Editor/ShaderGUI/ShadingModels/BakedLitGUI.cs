@@ -7,11 +7,14 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
     
     public static class BakedLitGUI
     {
+        
         public struct BakedLitProperties
         {
             // Surface Input Props
+            
             public MaterialProperty bumpMapProp;
 
+            
             public BakedLitProperties(MaterialProperty[] properties)
             {
                 // Surface Input Props
