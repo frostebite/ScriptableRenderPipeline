@@ -6,10 +6,14 @@ using UnityEditor.ProjectWindowCallback;
 
 namespace UnityEngine.Rendering.LWRP
 {
+    
     public enum ShadowCascadesOption
     {
+        
         NoCascades,
+        
         TwoCascades,
+        
         FourCascades,
     }
 
