@@ -10,6 +10,7 @@ namespace UnityEngine.Experimental.Rendering.LWRP
         Transparent,
     }
 
+    
     public class RenderObjects : ScriptableRendererFeature
     {
         [System.Serializable]
@@ -56,10 +57,12 @@ namespace UnityEngine.Experimental.Rendering.LWRP
             public float cameraFieldOfView = 60.0f;
         }
 
+        
         public RenderObjectsSettings settings = new RenderObjectsSettings();
 
         RenderObjectsPass renderObjectsPass;
 
+        
         public override void Create()
         {
             FilterSettings filter = settings.filterSettings;
@@ -78,6 +81,7 @@ namespace UnityEngine.Experimental.Rendering.LWRP
                     settings.stencilSettings.failOperation, settings.stencilSettings.zFailOperation);
         }
 
+        
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
             renderer.EnqueuePass(renderObjectsPass);
