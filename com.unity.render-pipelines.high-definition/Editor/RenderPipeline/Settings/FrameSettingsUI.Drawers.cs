@@ -189,23 +189,29 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline
         static void Drawer_SectionOtherSettings(SerializedFrameSettings serialized, Editor owner, bool withOverride)
         {
             var area = GetFrameSettingSectionContent(4, serialized, owner);
-            area.AmmendInfo(FrameSettingsField.LODBiasMode, overridedDefaultValue: LODBiasMode.FromQualitySettings);
-            var hasFixedLODBias = serialized.IsEnabled(FrameSettingsField.LODBiasMode).HasValue &&
-                                  serialized.IsEnabled(FrameSettingsField.LODBiasMode).Value;
+            area.AmmendInfo(
+                FrameSettingsField.LODBiasMode,
+                overridedDefaultValue: LODBiasMode.FromQualitySettings,
+                customGetter: () => (LODBiasMode)serialized.lodBiasMode.enumValueIndex,
+                customSetter: v => serialized.lodBiasMode.enumValueIndex = (int)v
+            );
             area.AmmendInfo(FrameSettingsField.LODBias,
                 overridedDefaultValue: QualitySettings.lodBias,
                 customGetter: () => serialized.lodBias.floatValue,
                 customSetter: v => serialized.lodBias.floatValue = (float)v,
-                customOverrideable: () => hasFixedLODBias);
+                customOverrideable: () => serialized.lodBiasMode.enumValueIndex != (int)LODBiasMode.FromQualitySettings);
 
-            area.AmmendInfo(FrameSettingsField.MaximumLODLevelMode, overridedDefaultValue: MaximumLODLevelMode.FromQualitySettings);
-            var hasFixedMaximumLODLevel = serialized.IsEnabled(FrameSettingsField.MaximumLODLevelMode).HasValue &&
-                                  serialized.IsEnabled(FrameSettingsField.MaximumLODLevelMode).Value;
+            area.AmmendInfo(
+                FrameSettingsField.MaximumLODLevelMode,
+                overridedDefaultValue: MaximumLODLevelMode.FromQualitySettings,
+                customGetter: () => (MaximumLODLevelMode)serialized.maximumLODLevelMode.enumValueIndex,
+                customSetter: v => serialized.maximumLODLevelMode.enumValueIndex = (int)v
+            );
             area.AmmendInfo(FrameSettingsField.MaximumLODLevel,
                 overridedDefaultValue: QualitySettings.maximumLODLevel,
                 customGetter: () => serialized.maximumLODLevel.intValue,
                 customSetter: v => serialized.maximumLODLevel.intValue = (int)v,
-                customOverrideable: () => hasFixedMaximumLODLevel);
+                customOverrideable: () => serialized.maximumLODLevelMode.enumValueIndex != (int)MaximumLODLevelMode.FromQualitySettings);
             area.Draw(withOverride);
         }
 #endif

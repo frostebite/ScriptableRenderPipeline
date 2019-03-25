@@ -1450,17 +1450,17 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 #if FRAMESETTINGS_LOD_BIAS
             // Set the LOD bias and store current value to be able to restore it.
             var initialLODBias = QualitySettings.lodBias;
-            if (hdCamera.frameSettings.lodBiasMode == LODBiasMode.Fixed)
-            {
-                QualitySettings.lodBias = hdCamera.frameSettings.lodBias;
-                cmd.SetLODBias(hdCamera.frameSettings.lodBias);
-            }
+            QualitySettings.lodBias = hdCamera.frameSettings.lodBiasMode.ComputeValue(
+                QualitySettings.lodBias,
+                hdCamera.frameSettings.lodBias
+            );
+            cmd.SetLODBias(QualitySettings.lodBias);
             var initialMaximumLODLevel = QualitySettings.maximumLODLevel;
-            if (hdCamera.frameSettings.maximumLODLevelMode == MaximumLODLevelMode.Fixed)
-            {
-                QualitySettings.maximumLODLevel = hdCamera.frameSettings.maximumLODLevel;
-                cmd.SetMaximumLODLevel(hdCamera.frameSettings.maximumLODLevel);
-            }
+            QualitySettings.maximumLODLevel = hdCamera.frameSettings.maximumLODLevelMode.ComputeValue(
+                QualitySettings.maximumLODLevel,
+                hdCamera.frameSettings.maximumLODLevel
+            );
+            cmd.SetMaximumLODLevel(QualitySettings.maximumLODLevel);
 #endif
 
             m_DbufferManager.enableDecals = false;
@@ -1976,12 +1976,10 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 #endif
 
 #if FRAMESETTINGS_LOD_BIAS
-            // Restore LOD bias
-            if (hdCamera.frameSettings.lodBiasMode == LODBiasMode.Fixed)
-                cmd.SetLODBias(initialLODBias);
-            // Restore Maximum LOD Level
-            if (hdCamera.frameSettings.maximumLODLevelMode == MaximumLODLevelMode.Fixed)
-                cmd.SetMaximumLODLevel(initialMaximumLODLevel);
+            QualitySettings.lodBias = initialLODBias;
+            cmd.SetLODBias(initialLODBias);
+            QualitySettings.maximumLODLevel = initialMaximumLODLevel;
+            cmd.SetMaximumLODLevel(initialMaximumLODLevel);
 #endif
         }
 
@@ -2213,10 +2211,14 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             var initialMaximumLODLevel = QualitySettings.maximumLODLevel;
             try
             {
-                if (hdCamera.frameSettings.lodBiasMode == LODBiasMode.Fixed)
-                    QualitySettings.lodBias = hdCamera.frameSettings.lodBias;
-                if (hdCamera.frameSettings.maximumLODLevelMode == MaximumLODLevelMode.Fixed)
-                    QualitySettings.maximumLODLevel = hdCamera.frameSettings.maximumLODLevel;
+                QualitySettings.lodBias = hdCamera.frameSettings.lodBiasMode.ComputeValue(
+                    QualitySettings.lodBias,
+                    hdCamera.frameSettings.lodBias
+                );
+                QualitySettings.maximumLODLevel = hdCamera.frameSettings.maximumLODLevelMode.ComputeValue(
+                    QualitySettings.maximumLODLevel,
+                    hdCamera.frameSettings.maximumLODLevel
+                );
 #endif
 
                 var includeEnvLights = hdCamera.frameSettings.IsEnabled(FrameSettingsField.SpecularLighting);
