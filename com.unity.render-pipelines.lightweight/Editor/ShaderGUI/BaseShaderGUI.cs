@@ -29,9 +29,12 @@ namespace UnityEditor
             Multiply
         }
 
+        
         public enum SmoothnessSource
         {
+            
             BaseAlpha,
+            
             SpecularAlpha
         }
 
