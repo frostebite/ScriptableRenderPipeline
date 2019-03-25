@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 
 namespace UnityEngine.Experimental.Rendering.LWRP
 {
+    
     public class RenderObjectsPass : ScriptableRenderPass
     {
         RenderQueueType renderQueueType;
@@ -11,17 +12,21 @@ namespace UnityEngine.Experimental.Rendering.LWRP
         RenderObjects.CustomCameraSettings m_CameraSettings;
         string m_ProfilerTag;
 
+        
         public Material overrideMaterial { get; set; }
+        
         public int overrideMaterialPassIndex { get; set; }
 
         List<ShaderTagId> m_ShaderTagIdList = new List<ShaderTagId>();
 
+        
         public void SetDetphState(bool writeEnabled, CompareFunction function = CompareFunction.Less)
         {
             m_RenderStateBlock.mask |= RenderStateMask.Depth;
             m_RenderStateBlock.depthState = new DepthState(writeEnabled, function);
         }
 
+        
         public void SetStencilState(int reference, CompareFunction compareFunction, StencilOp passOp, StencilOp failOp, StencilOp zFailOp)
         {
             StencilState stencilState = StencilState.defaultValue;
@@ -38,6 +43,7 @@ namespace UnityEngine.Experimental.Rendering.LWRP
 
         RenderStateBlock m_RenderStateBlock;
 
+        
         public RenderObjectsPass(string profilerTag, RenderPassEvent renderPassEvent, string[] shaderTags, RenderQueueType renderQueueType, int layerMask, RenderObjects.CustomCameraSettings cameraSettings)
         {
             m_ProfilerTag = profilerTag;
@@ -66,6 +72,7 @@ namespace UnityEngine.Experimental.Rendering.LWRP
 
         }
 
+        
         public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
         {
             SortingCriteria sortingCriteria = (renderQueueType == RenderQueueType.Transparent)
