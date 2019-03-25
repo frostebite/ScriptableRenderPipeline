@@ -13,9 +13,12 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             Metallic
         }
 
+        
         public enum SmoothnessMapChannel
         {
+            
             SpecularMetallicAlpha,
+            
             AlbedoAlpha,
         }
 
