@@ -13,23 +13,34 @@ namespace UnityEngine.Experimental.Rendering.LWRP
     
     public class RenderObjects : ScriptableRendererFeature
     {
+        
         [System.Serializable]
         public class RenderObjectsSettings
         {
+            
             public string passTag = "RenderObjectsFeature";
+            
             public RenderPassEvent Event = RenderPassEvent.AfterRenderingOpaques;
 
+            
             public FilterSettings filterSettings = new FilterSettings();
 
+            
             public Material overrideMaterial = null;
+            
             public int overrideMaterialPassIndex = 0;
 
+            
             public bool overrideDepthState = false;
+            
             public CompareFunction depthCompareFunction = CompareFunction.LessEqual;
+            
             public bool enableWrite = true;
 
+            
             public StencilStateData stencilSettings = new StencilStateData();
 
+            
             public CustomCameraSettings cameraSettings = new CustomCameraSettings();
         }
         
