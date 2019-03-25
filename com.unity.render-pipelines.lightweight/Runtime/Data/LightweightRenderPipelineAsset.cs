@@ -73,6 +73,7 @@ namespace UnityEngine.Rendering.LWRP
         ForwardRenderer,
     }
 
+    
     public class LightweightRenderPipelineAsset : RenderPipelineAsset, ISerializationCallbackReceiver
     {
         Shader m_DefaultShader;
@@ -136,6 +137,7 @@ namespace UnityEngine.Rendering.LWRP
         static readonly string s_SearchPathProject = "Assets";
         static readonly string s_SearchPathPackage = "Packages/com.unity.render-pipelines.lightweight";
 
+        
         public static LightweightRenderPipelineAsset Create()
         {
             var instance = CreateInstance<LightweightRenderPipelineAsset>();
@@ -201,6 +203,7 @@ namespace UnityEngine.Rendering.LWRP
         }
 #endif
 
+        
         public ScriptableRendererData LoadBuiltinRendererData()
         {
             switch (m_RendererType)
@@ -218,6 +221,7 @@ namespace UnityEngine.Rendering.LWRP
             return m_RendererData;
         }
 
+        
         protected override RenderPipeline CreatePipeline()
         {
             if (m_RendererData == null)
@@ -257,6 +261,7 @@ namespace UnityEngine.Rendering.LWRP
 #endif
         }
 
+        
         public ScriptableRenderer scriptableRenderer
         {
             get
@@ -271,132 +276,156 @@ namespace UnityEngine.Rendering.LWRP
             }
         }
 
+        
         public bool supportsCameraDepthTexture
         {
             get { return m_RequireDepthTexture; }
             set { m_RequireDepthTexture = value; }
         }
 
+        
         public bool supportsCameraOpaqueTexture
         {
             get { return m_RequireOpaqueTexture; }
             set { m_RequireOpaqueTexture = value; }
         }
 
+        
         public Downsampling opaqueDownsampling
         {
             get { return m_OpaqueDownsampling; }
         }
 
+        
         public bool supportsHDR
         {
             get { return m_SupportsHDR; }
             set { m_SupportsHDR = value; }
         }
 
+        
         public int msaaSampleCount
         {
             get { return (int)m_MSAA; }
             set { m_MSAA = (MsaaQuality)value; }
         }
 
+        
         public float renderScale
         {
             get { return m_RenderScale; }
             set { m_RenderScale = ValidateRenderScale(value); }
         }
 
+        
         public LightRenderingMode mainLightRenderingMode
         {
             get { return m_MainLightRenderingMode; }
         }
 
+        
         public bool supportsMainLightShadows
         {
             get { return m_MainLightShadowsSupported; }
         }
 
+        
         public int mainLightShadowmapResolution
         {
             get { return (int)m_MainLightShadowmapResolution; }
         }
 
+        
         public LightRenderingMode additionalLightsRenderingMode
         {
             get { return m_AdditionalLightsRenderingMode; }
         }
 
+        
         public int maxAdditionalLightsCount
         {
             get { return m_AdditionalLightsPerObjectLimit; }
             set { m_AdditionalLightsPerObjectLimit = ValidatePerObjectLights(value); }
         }
 
+        
         public bool supportsAdditionalLightShadows
         {
             get { return m_AdditionalLightShadowsSupported; }
         }
 
+        
         public int additionalLightsShadowmapResolution
         {
             get { return (int)m_AdditionalLightsShadowmapResolution; }
         }
 
+        
         public float shadowDistance
         {
             get { return m_ShadowDistance; }
             set { m_ShadowDistance = Mathf.Max(0.0f, value); }
         }
 
+        
         public ShadowCascadesOption shadowCascadeOption
         {
             get { return m_ShadowCascades; }
             set { m_ShadowCascades = value; }
         }
 
+        
         public float cascade2Split
         {
             get { return m_Cascade2Split; }
         }
 
+        
         public Vector3 cascade4Split
         {
             get { return m_Cascade4Split; }
         }
 
+        
         public float shadowDepthBias
         {
             get { return m_ShadowDepthBias; }
             set { m_ShadowDepthBias = ValidateShadowBias(value); }
         }
 
+        
         public float shadowNormalBias
         {
             get { return m_ShadowNormalBias; }
             set { m_ShadowNormalBias = ValidateShadowBias(value); }
         }
 
+        
         public bool supportsSoftShadows
         {
             get { return m_SoftShadowsSupported; }
         }
 
+        
         public bool supportsDynamicBatching
         {
             get { return m_SupportsDynamicBatching; }
             set { m_SupportsDynamicBatching = value; }
         }
 
+        
         public bool supportsMixedLighting
         {
             get { return m_MixedLightingSupported; }
         }
 
+        
         public ShaderVariantLogLevel shaderVariantLogLevel
         {
             get { return m_ShaderVariantLogLevel; }
             set { m_ShaderVariantLogLevel = value; }
         }
+        
         
         public bool useSRPBatcher
         {
@@ -404,46 +433,55 @@ namespace UnityEngine.Rendering.LWRP
             set { m_UseSRPBatcher = value; }
         }
 
+        
         public override Material defaultMaterial
         {
             get { return GetMaterial(DefaultMaterialType.Standard); }
         }
 
+        
         public override Material defaultParticleMaterial
         {
             get { return GetMaterial(DefaultMaterialType.Particle); }
         }
 
+        
         public override Material defaultLineMaterial
         {
             get { return GetMaterial(DefaultMaterialType.Particle); }
         }
 
+        
         public override Material defaultTerrainMaterial
         {
             get { return GetMaterial(DefaultMaterialType.Terrain); }
         }
 
+        
         public override Material defaultUIMaterial
         {
             get { return GetMaterial(DefaultMaterialType.UnityBuiltinDefault); }
         }
 
+        
         public override Material defaultUIOverdrawMaterial
         {
             get { return GetMaterial(DefaultMaterialType.UnityBuiltinDefault); }
         }
 
+        
         public override Material defaultUIETC1SupportedMaterial
         {
             get { return GetMaterial(DefaultMaterialType.UnityBuiltinDefault); }
         }
 
+        
         public override Material default2DMaterial
         {
             get { return GetMaterial(DefaultMaterialType.UnityBuiltinDefault); }
         }
 
+        
         public override Shader defaultShader
         {
             get
@@ -455,41 +493,49 @@ namespace UnityEngine.Rendering.LWRP
         }
 
 #if UNITY_EDITOR
+        
         public override Shader autodeskInteractiveShader
         {
             get { return editorResources.autodeskInteractiveShader; }
         }
 
+        
         public override Shader autodeskInteractiveTransparentShader
         {
             get { return editorResources.autodeskInteractiveTransparentShader; }
         }
 
+        
         public override Shader autodeskInteractiveMaskedShader
         {
             get { return editorResources.autodeskInteractiveMaskedShader; }
         }
 
+        
         public override Shader terrainDetailLitShader
         {
             get { return editorResources.terrainDetailLitShader; }
         }
 
+        
         public override Shader terrainDetailGrassShader
         {
             get { return editorResources.terrainDetailGrassShader; }
         }
 
+        
         public override Shader terrainDetailGrassBillboardShader
         {
             get { return editorResources.terrainDetailGrassBillboardShader; }
         }
 #endif
 
+        
         public void OnBeforeSerialize()
         {
         }
 
+        
         public void OnAfterDeserialize()
         {
             if (k_AssetVersion < 3)
