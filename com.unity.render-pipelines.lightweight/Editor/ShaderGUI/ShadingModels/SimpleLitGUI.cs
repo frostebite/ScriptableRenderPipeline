@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.LWRP.ShaderGUI
 {
+    
     public static class SimpleLitGUI
     {
         public enum SpecularSource
@@ -56,11 +57,13 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             }
         }
 
+        
         public static void Inputs(SimpleLitProperties properties, MaterialEditor materialEditor, Material material)
         {
             DoSpecularArea(properties, materialEditor, material);
             BaseShaderGUI.DrawNormalArea(materialEditor, properties.bumpMapProp);
         }
+        
         
         public static void Advanced(SimpleLitProperties properties)
         {
@@ -73,6 +76,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             EditorGUI.showMixedValue = false;
         }
 
+        
         public static void DoSpecularArea(SimpleLitProperties properties, MaterialEditor materialEditor, Material material)
         {
             SpecularSource specSource = (SpecularSource)properties.specHighlights.floatValue;
@@ -82,6 +86,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             EditorGUI.EndDisabledGroup();
         }
 
+        
         public static void DoSmoothness(SimpleLitProperties properties, Material material)
         {
             var opaque = ((BaseShaderGUI.SurfaceType) material.GetFloat("_Surface") ==
@@ -114,6 +119,7 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             EditorGUI.EndDisabledGroup();
         }
 
+        
         public static void SetMaterialKeywords(Material material)
         {
             UpdateMaterialSpecularSource(material);
