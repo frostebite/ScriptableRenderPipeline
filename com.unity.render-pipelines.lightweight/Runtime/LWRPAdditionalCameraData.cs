@@ -13,9 +13,12 @@ namespace UnityEngine.Rendering.LWRP
         UsePipelineSettings,
     }
 
+    
     public enum RendererOverrideOption
     {
+        
         Custom,
+        
         UsePipelineSettings,
     }
 
