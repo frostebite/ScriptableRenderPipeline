@@ -19,35 +19,46 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             AlbedoAlpha,
         }
 
+        
         public static class Styles
         {
+            
             public static GUIContent workflowModeText = new GUIContent("Workflow Mode",
                 "Select a workflow that fits your textures. Choose between Metallic or Specular.");
 
+            
             public static GUIContent specularMapText =
                 new GUIContent("Specular Map", "Sets and configures the map and color for the Specular workflow.");
 
+            
             public static GUIContent metallicMapText =
                 new GUIContent("Metallic Map", "Sets and configures the map for the Metallic workflow.");
 
+            
             public static GUIContent smoothnessText = new GUIContent("Smoothness",
                 "Controls the spread of highlights and reflections on the surface.");
 
+            
             public static GUIContent smoothnessMapChannelText =
                 new GUIContent("Source",
                     "Specifies where to sample a smoothness map from. By default, uses the alpha channel for your map.");
 
+            
             public static GUIContent highlightsText = new GUIContent("Specular Highlights",
                 "When enabled, the Material reflects the shine from direct lighting.");
 
+            
             public static GUIContent reflectionsText =
                 new GUIContent("Environment Reflections",
                     "When enabled, the Material samples reflections from the nearest Reflection Probes or Lighting Probe.");
 
+            
             public static GUIContent occlusionText = new GUIContent("Occlusion Map",
                 "Sets an occlusion map to simulate shadowing from ambient lighting.");
 
+            
             public static readonly string[] metallicSmoothnessChannelNames = {"Metallic Alpha", "Albedo Alpha"};
+            
             public static readonly string[] specularSmoothnessChannelNames = {"Specular Alpha", "Albedo Alpha"};
         }
 
