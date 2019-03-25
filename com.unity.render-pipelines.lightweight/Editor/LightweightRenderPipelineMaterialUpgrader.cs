@@ -137,8 +137,10 @@ namespace UnityEditor.Rendering.LWRP
         }
     }
 
+    
     public static class SupportedUpgradeParams
     {
+        
         static public UpgradeParams diffuseOpaque = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -148,6 +150,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.BaseAlpha,
         };
 
+        
         static public UpgradeParams specularOpaque = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -157,6 +160,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.BaseAlpha,
         };
 
+        
         static public UpgradeParams diffuseAlpha = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Transparent,
@@ -166,6 +170,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.SpecularAlpha,
         };
 
+        
         static public UpgradeParams specularAlpha = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Transparent,
@@ -175,6 +180,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.SpecularAlpha,
         };
 
+        
         static public UpgradeParams diffuseAlphaCutout = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -184,6 +190,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.SpecularAlpha,
         };
 
+        
         static public UpgradeParams specularAlphaCutout = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -193,6 +200,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.SpecularAlpha,
         };
 
+        
         static public UpgradeParams diffuseCubemap = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -202,6 +210,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.BaseAlpha,
         };
 
+        
         static public UpgradeParams specularCubemap = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Opaque,
@@ -211,6 +220,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.BaseAlpha,
         };
 
+        
         static public UpgradeParams diffuseCubemapAlpha = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Transparent,
@@ -220,6 +230,7 @@ namespace UnityEditor.Rendering.LWRP
             smoothnessSource = SmoothnessSource.BaseAlpha,
         };
 
+        
         static public UpgradeParams specularCubemapAlpha = new UpgradeParams()
         {
             surfaceType = UpgradeSurfaceType.Transparent,
