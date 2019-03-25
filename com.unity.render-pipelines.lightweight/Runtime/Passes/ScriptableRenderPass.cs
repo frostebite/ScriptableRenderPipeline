@@ -26,28 +26,31 @@ namespace UnityEngine.Rendering.LWRP
         AfterRendering = 1000,
     }
 
-    /// <summary>
-    /// <c>ScriptableRenderPass</c> implements a logical rendering pass that can be used to extend LWRP renderer.
-    /// </summary>
-    public abstract class ScriptableRenderPass
+    /// <!-- Badly formed XML comment ignored for member "T:UnityEngine.Rendering.LWRP.ScriptableRenderPass" -->
+            public abstract class ScriptableRenderPass
     {
+        
         public RenderPassEvent renderPassEvent { get; set; }
 
+        
         public RenderTargetIdentifier colorAttachment
         {
             get => m_ColorAttachment;
         }
 
+        
         public RenderTargetIdentifier depthAttachment
         {
             get => m_DepthAttachment;
         }
 
+        
         public ClearFlag clearFlag
         {
             get => m_ClearFlag;
         }
 
+        
         public Color clearColor
         {
             get => m_ClearColor;
@@ -61,6 +64,7 @@ namespace UnityEngine.Rendering.LWRP
         ClearFlag m_ClearFlag = ClearFlag.None;
         Color m_ClearColor = Color.black;
 
+        
         public ScriptableRenderPass()
         {
             renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
@@ -72,6 +76,7 @@ namespace UnityEngine.Rendering.LWRP
             isBlitRenderPass = false;
         }
 
+        
         public void ConfigureTarget(RenderTargetIdentifier colorAttachment, RenderTargetIdentifier depthAttachment)
         {
             overrideCameraTarget = true;
@@ -79,6 +84,7 @@ namespace UnityEngine.Rendering.LWRP
             m_DepthAttachment = depthAttachment;
         }
 
+        
         public void ConfigureTarget(RenderTargetIdentifier colorAttachment)
         {
             overrideCameraTarget = true;
@@ -86,70 +92,65 @@ namespace UnityEngine.Rendering.LWRP
             m_DepthAttachment = BuiltinRenderTextureType.CameraTarget;
         }
 
+        
         public void ConfigureClear(ClearFlag clearFlag, Color clearColor)
         {
             m_ClearFlag = clearFlag;
             m_ClearColor = clearColor;
         }
 
+        
         public virtual void Configure(CommandBuffer cmd, RenderTextureDescriptor cameraTextureDescriptor)
         {}
 
-        /// <summary>
-        /// Cleanup any allocated data that was created during the execution of the pass.
-        /// </summary>
-        /// <param name="cmd">Use this CommandBuffer to cleanup any generated data</param>
-        public virtual void FrameCleanup(CommandBuffer cmd)
+        ///     <summary>
+                ///     Cleanup any allocated data that was created during the execution of the pass.
+                ///     </summary>
+                ///     <param name="cmd">Use this CommandBuffer to cleanup any generated data</param>
+                        public virtual void FrameCleanup(CommandBuffer cmd)
         {}
 
-        /// <summary>
-        /// Execute the pass. This is where custom rendering occurs. Specific details are left to the implementation
-        /// </summary>
-        /// <param name="context">Use this render context to issue any draw commands during execution</param>
-        /// <param name="renderingData">Current rendering state information</param>
-        public abstract void Execute(ScriptableRenderContext context, ref RenderingData renderingData);
+        ///     <summary>
+                ///     Execute the pass. This is where custom rendering occurs. Specific details are left to the implementation
+                ///     </summary>
+                ///     <param name="context">Use this render context to issue any draw commands during execution</param>
+                ///     <param name="renderingData">Current rendering state information</param>
+                        public abstract void Execute(ScriptableRenderContext context, ref RenderingData renderingData);
 
-        /// <summary>
-        /// Add a blit command to the context for execution. This changes the active render target in the ScriptableRenderer to
-        /// destination.
-        /// </summary>
-        /// <param name="cmd">Command buffer to record command for execution.</param>
-        /// <param name="source">Source texture or target identifier to blit from.</param>
-        /// <param name="destination">Destination texture or target identifier to blit into. This becomes the renderer active render target.</param>
-        /// <param name="material">Material to use.</param>
-        /// <param name="passIndex">Shader pass to use. Default is 0.</param>
-        /// <seealso cref="ScriptableRenderer"/>
-        public void Blit(CommandBuffer cmd, RenderTargetIdentifier source, RenderTargetIdentifier destination, Material material = null, int passIndex = 0)
+        ///     <summary>
+                ///     Add a blit command to the context for execution. This changes the active render target in the ScriptableRenderer to
+                ///     destination.
+                ///     </summary>
+                ///     <param name="cmd">Command buffer to record command for execution.</param>
+                ///     <param name="source">Source texture or target identifier to blit from.</param>
+                ///     <param name="destination">Destination texture or target identifier to blit into. This becomes the renderer active render target.</param>
+                ///     <param name="material">Material to use.</param>
+                ///     <param name="passIndex">Shader pass to use. Default is 0.</param>
+                ///     <seealso cref="T:UnityEngine.Rendering.LWRP.ScriptableRenderer"/>
+                        public void Blit(CommandBuffer cmd, RenderTargetIdentifier source, RenderTargetIdentifier destination, Material material = null, int passIndex = 0)
         {
             ScriptableRenderer.SetRenderTarget(cmd, destination, BuiltinRenderTextureType.CameraTarget, clearFlag, clearColor);
             cmd.Blit(source, destination, material, passIndex);
         }
 
-        /// <summary>
-        /// Adds a Render Post-processing command for execution. This changes the active render target in the ScriptableRenderer to destination.
-        /// </summary>
-        /// <param name="cmd">Command buffer to record command for execution.</param>
-        /// <param name="cameraData">Camera rendering data.</param>
-        /// <param name="sourceDescriptor">Render texture descriptor for source.</param>
-        /// <param name="source">Source texture or render target identifier.</param>
-        /// <param name="destination">Destination texture or render target identifier.</param>
-        /// <param name="opaqueOnly">If true, only renders opaque post-processing effects. Otherwise, renders before and after stack post-processing effects.</param>
-        /// <param name="flip">If true, flips image vertically.</param>
-        public void RenderPostProcessing(CommandBuffer cmd, ref CameraData cameraData, RenderTextureDescriptor sourceDescriptor, RenderTargetIdentifier source, RenderTargetIdentifier destination, bool opaqueOnly, bool flip)
+        ///     <summary>
+                ///     Adds a Render Post-processing command for execution. This changes the active render target in the ScriptableRenderer to destination.
+                ///     </summary>
+                ///     <param name="cmd">Command buffer to record command for execution.</param>
+                ///     <param name="cameraData">Camera rendering data.</param>
+                ///     <param name="sourceDescriptor">Render texture descriptor for source.</param>
+                ///     <param name="source">Source texture or render target identifier.</param>
+                ///     <param name="destination">Destination texture or render target identifier.</param>
+                ///     <param name="opaqueOnly">If true, only renders opaque post-processing effects. Otherwise, renders before and after stack post-processing effects.</param>
+                ///     <param name="flip">If true, flips image vertically.</param>
+                        public void RenderPostProcessing(CommandBuffer cmd, ref CameraData cameraData, RenderTextureDescriptor sourceDescriptor, RenderTargetIdentifier source, RenderTargetIdentifier destination, bool opaqueOnly, bool flip)
         {
             ScriptableRenderer.ConfigureActiveTarget(destination, BuiltinRenderTextureType.CameraTarget);
             RenderingUtils.RenderPostProcessing(cmd, ref cameraData, sourceDescriptor, source, destination, opaqueOnly, flip);
         }
 
-        /// <summary>
-        /// Creates <c>DrawingSettings</c> based on current the rendering state.
-        /// </summary>
-        /// <param name="shaderTagId">Shader pass tag to render.</param>
-        /// <param name="renderingData">Current rendering state.</param>
-        /// <param name="sortingCriteria">Criteria to sort objects being rendered.</param>
-        /// <returns></returns>
-        /// <seealso cref="DrawingSettings"/>
-        public DrawingSettings CreateDrawingSettings(ShaderTagId shaderTagId, ref RenderingData renderingData, SortingCriteria sortingCriteria)
+        /// <!-- Badly formed XML comment ignored for member "M:UnityEngine.Rendering.LWRP.ScriptableRenderPass.CreateDrawingSettings(ShaderTagId,UnityEngine.Rendering.LWRP.RenderingData@,SortingCriteria)" -->
+                        public DrawingSettings CreateDrawingSettings(ShaderTagId shaderTagId, ref RenderingData renderingData, SortingCriteria sortingCriteria)
         {
             Camera camera = renderingData.cameraData.camera;
             SortingSettings sortingSettings = new SortingSettings(camera) { criteria = sortingCriteria };
@@ -163,15 +164,8 @@ namespace UnityEngine.Rendering.LWRP
             return settings;
         }
 
-        /// <summary>
-        /// Creates <c>DrawingSettings</c> based on current rendering state.
-        /// </summary>
-        /// /// <param name="shaderTagIdList">List of shader pass tag to render.</param>
-        /// <param name="renderingData">Current rendering state.</param>
-        /// <param name="sortingCriteria">Criteria to sort objects being rendered.</param>
-        /// <returns></returns>
-        /// <seealso cref="DrawingSettings"/>
-        public DrawingSettings CreateDrawingSettings(List<ShaderTagId> shaderTagIdList,
+        /// <!-- Badly formed XML comment ignored for member "M:UnityEngine.Rendering.LWRP.ScriptableRenderPass.CreateDrawingSettings(System.Collections.Generic.List{ShaderTagId},UnityEngine.Rendering.LWRP.RenderingData@,SortingCriteria)" -->
+                        public DrawingSettings CreateDrawingSettings(List<ShaderTagId> shaderTagIdList,
             ref RenderingData renderingData, SortingCriteria sortingCriteria)
         {
             if (shaderTagIdList == null || shaderTagIdList.Count == 0)
@@ -186,11 +180,13 @@ namespace UnityEngine.Rendering.LWRP
             return settings;
         }
 
+        
         public static bool operator <(ScriptableRenderPass lhs, ScriptableRenderPass rhs)
         {
             return lhs.renderPassEvent < rhs.renderPassEvent;
         }
 
+        
         public static bool operator >(ScriptableRenderPass lhs, ScriptableRenderPass rhs)
         {
             return lhs.renderPassEvent > rhs.renderPassEvent;
