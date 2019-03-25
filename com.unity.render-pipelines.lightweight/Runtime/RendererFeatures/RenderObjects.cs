@@ -33,14 +33,19 @@ namespace UnityEngine.Experimental.Rendering.LWRP
             public CustomCameraSettings cameraSettings = new CustomCameraSettings();
         }
         
+        
         [System.Serializable]
         public class FilterSettings
         {
             // TODO: expose opaque, transparent, all ranges as drop down
+            
             public RenderQueueType RenderQueueType;
+            
             public LayerMask LayerMask;
+            
             public string[] PassNames;
 
+            
             public FilterSettings()
             {
                 RenderQueueType = RenderQueueType.Opaque;
