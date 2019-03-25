@@ -10,9 +10,12 @@ namespace UnityEditor
     {
         #region EnumsAndClasses
 
+        
         public enum SurfaceType
         {
+            
             Opaque,
+            
             Transparent
         }
 
