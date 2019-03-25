@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.LWRP
 {
+    
     [CustomEditor(typeof(LightweightRenderPipelineAsset))]
     public class LightweightRenderPipelineAssetEditor : Editor
     {
@@ -102,6 +103,7 @@ namespace UnityEditor.Rendering.LWRP
 
         internal static LightRenderingMode selectedLightRenderingMode;
 
+        
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
